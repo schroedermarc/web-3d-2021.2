@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity
+        geometry="primitive: box; width: 1; height: 1"
+        position="0 1 0"
+        material="color: red"
+        animation="property: rotation; to: 0 359.999 0; dur: 2000; easing: linear; loop: true"
+        shadow="cast: true;"
+      >
+        <a-entity
+          geometry="primitive: cylinder;"
+          position="1 1 1"
+          rotation="45 45 45"
+          scale=".3 .3 .3"
+          material="color: purple;"
+        ></a-entity>
+
+        <a-entity
+          geometry="primitive: torus;"
+          position="-1 1 1"
+          rotation="90 45 45"
+          scale=".3 .3 .3"
+          material="color: orange;"
+        ></a-entity>
+      </a-entity>
+
+      <a-entity
+        geometry="primitive: plane; width: 10; height: 10"
+        rotation="270 0 0"
+        shadow="receive: true;"
+        material="color: darkgreen"
+      ></a-entity>
+
+      <a-entity camera look-controls wasd-controls position="0 1 5"> </a-entity>
+
+      <a-entity
+        light="type: point; castShadow: true"
+        position="3 6 5"
+      ></a-entity>
+
+      <a-entity light="type: ambient; intensity: .2"></a-entity>
+
+      <a-entity camera look-controls wasd-controls position="0 1 5"></a-entity>
+    </a-scene>
+  </body>
+</html>
