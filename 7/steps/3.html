@@ -1,8 +1,9 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
     <style>
-      #slider {
+      #new-cube-button {
         position: absolute;
         z-index: 20;
         top: 10px;
@@ -44,19 +45,29 @@
 
       <a-entity light="type: ambient; intensity: .2"></a-entity>
 
-      <a-entity camera look-controls wasd-controls position="0 1 5"> </a-entity>
+      <a-entity camera look-controls wasd-controls position="3 1 15">
+      </a-entity>
     </a-scene>
 
-    <input type="range" id="slider" min="0" max="10" value="0" />
+    <button id="new-cube-button">New Cube</button>
 
     <script>
       const sceneEl = document.querySelector('a-scene');
       const box = sceneEl.querySelector('#box');
-      const slider = document.getElementById('slider');
+      const button = document.getElementById('new-cube-button');
 
-      setInterval(() => {
-        box.object3D.rotation.x += slider.value / 100;
-      }, 1);
+      button.addEventListener('click', () => {
+        var entityEl = document.createElement('a-entity');
+        entityEl.setAttribute('position', {
+          x: Math.random() * 10,
+          y: Math.random() * 10,
+          z: Math.random() * 10,
+        });
+        entityEl.setAttribute('material', { color: chroma.random().hex() });
+        entityEl.setAttribute('geometry', { primitive: 'box' });
+
+        sceneEl.appendChild(entityEl);
+      });
     </script>
   </body>
 </html>
