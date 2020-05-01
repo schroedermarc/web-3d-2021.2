@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="../lib/multi.js"></script>
+    <script src="../scripts/canvasGenerator.js"></script>
+
+    <style>
+      #shake-button {
+        font-family: 'Fugaz One', cursive;
+        position: absolute;
+        z-index: 1;
+        top: 20px;
+        left: 20px;
+        width: 200px;
+        height: 40px;
+        color: white;
+        background-color: #054ba6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 32px;
+      }
+    </style>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="shake-button">SHAKE</div>
+
+    <a-scene shadow antialiasing>
+      <a-assets>
+        <a-asset-item
+          id="eight-ball-shell"
+          src="./models/eightBall.obj"
+        ></a-asset-item>
+
+        <a-cubemap id="goa-cubemap">
+          <img src="./images/goamap/Right.png" />
+          <img src="./images/goamap/Left.png" />
+          <img src="./images/goamap/Top.png" />
+          <img src="./images/goamap/Front.png" />
+          <img src="./images/goamap/Bottom.png" />
+          <img src="./images/goamap/Back.png" />
+        </a-cubemap>
+
+        <canvas id="custom-canvas-0"></canvas>
+        <canvas id="custom-canvas-1"></canvas>
+        <canvas id="custom-canvas-2"></canvas>
+        <canvas id="custom-canvas-3"></canvas>
+        <canvas id="custom-canvas-4"></canvas>
+        <canvas id="custom-canvas-5"></canvas>
+      </a-assets>
+
+      <a-entity environment="preset: goaland"></a-entity>
+
+      <!-- eightball -->
+      <a-entity position="0 2 0">
+        <!-- shell -->
+        <a-entity
+          obj-model="obj: #eight-ball-shell"
+          position="0 0 0"
+          rotation="90 0 0"
+          material="color: #111111; metalness: 0.6; roughness: 0; envMap: #goa-cubemap; wireframe: false"
+        >
+        </a-entity>
+
+        <!-- answer cube -->
+        <a-entity id="box" position="0 0 -0.07">
+          <!-- front -->
+          <a-entity
+            geometry="primitive: plane"
+            height="1"
+            width="1"
+            position="0 0 0.5"
+            material="src:#custom-canvas-0; side: double"
+          ></a-entity>
+          <!-- back -->
+          <a-entity
+            geometry="primitive: plane"
+            height="1"
+            width="1"
+            position="0 0 -0.5"
+            material="src:#custom-canvas-1; side: double"
+          ></a-entity>
+          <!-- top -->
+          <a-entity
+            geometry="primitive: plane"
+            height="1"
+            width="1"
+            position="0 0.5 0"
+            rotation="90 0 0"
+            material="src:#custom-canvas-2; side: double"
+          ></a-entity>
+          <!-- bottom -->
+          <a-entity
+            geometry="primitive: plane"
+            height="1"
+            width="1"
+            position="0 -0.5 0"
+            rotation="90 0 0"
+            material="src:#custom-canvas-3; side: double"
+          ></a-entity>
+          <!-- right -->
+          <a-entity
+            geometry="primitive: plane"
+            height="1"
+            width="1"
+            position="-0.5 0 0"
+            rotation="0 90 0"
+            material="src:#custom-canvas-4; side: double"
+          ></a-entity>
+          <!-- left -->
+          <a-entity
+            geometry="primitive: plane"
+            height="1"
+            width="1"
+            position="0.5 0 0"
+            rotation="0 90 0"
+            material="src:#custom-canvas-5; side: double"
+          ></a-entity>
+        </a-entity>
+
+        <!-- "water" -->
+        <a-entity
+          geometry="primitive: cylinder"
+          scale="0.9 0.03 0.9"
+          position="0 0 0"
+          rotation="90 0 0 "
+          material="color: black"
+        >
+        </a-entity>
+
+        <!-- "glass" -->
+        <a-entity
+          geometry="primitive: cylinder"
+          scale="0.54 0.03 0.54"
+          position="0 0 0.82"
+          rotation="90 0 0 "
+          material="color: white; opacity: 0.2; metalness: 0.9; roughness: 0"
+        >
+        </a-entity>
+      </a-entity>
+
+      <!-- camera -->
+      <a-entity camera look-controls wasd-controls position="0 2 3"></a-entity>
+    </a-scene>
+    <script>
+      var canvases = canvasMessageGenerator([
+        "What've you got to lose?",
+        'You and whose army?',
+        "I wouldn't. But I'm not you, am I?",
+        'Do it, but make sure you film it.',
+        'Oh god, anything but that.',
+        'The world is very old',
+      ]);
+
+      const sceneEl = document.querySelector('a-scene');
+      const box = document.querySelector('#box');
+      let interval;
+
+      document
+        .getElementById('shake-button')
+        .addEventListener('mousedown', () => {
+          const rotationSpeeds = [
+            Math.random() * 0.05,
+            Math.random() * 0.05,
+            Math.random() * 0.05,
+          ];
+
+          interval = setInterval(() => {
+            box.object3D.rotation.x += rotationSpeeds[0];
+            box.object3D.rotation.y += rotationSpeeds[1];
+            box.object3D.rotation.z += rotationSpeeds[2];
+          }, 1);
+        });
+
+      document
+        .getElementById('shake-button')
+        .addEventListener('mouseup', () => {
+          clearInterval(interval);
+        });
+
+      document
+        .getElementById('shake-button')
+        .addEventListener('mouseleave', () => {
+          clearInterval(interval);
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Glitch!</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="./displacement-shader.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-sphere
+        material="shader:displacement"
+        scale="1 1 1"
+        radius="0.2"
+        position="0 1.5 -2"
+        segments-height="128"
+        segments-width="128"
+      >
+        <a-animation
+          attribute="scale"
+          direction="alternate-reverse"
+          dur="5000"
+          from="1 1 1"
+          to="4 4 4"
+          repeat="indefinite"
+        ></a-animation>
+      </a-sphere>
+      <a-box
+        color="#CCC"
+        width="3"
+        depth="3"
+        height="0.1"
+        position="0 0 -2"
+      ></a-box>
+    </a-scene>
+  </body>
+</html>
