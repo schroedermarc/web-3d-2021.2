@@ -1,4 +1,5 @@
 var canvasMessageGenerator = (msgs) => {
+  // takes a list of strings(6) and draws those strings to canvases called #custom-canvas-i
   const canvasList = [];
   const canvasSize = 512;
   const fontSize = 48;
@@ -20,7 +21,6 @@ var canvasMessageGenerator = (msgs) => {
 
   msgs.forEach((msg, i) => {
     // create canvas object
-    // const canvas = document.createElement('canvas');
     const canvas = document.getElementById(`custom-canvas-${i}`);
     // create context
     const ctx = canvas.getContext('2d');

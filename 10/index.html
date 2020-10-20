@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  </head>
+  <body>
+    <script src='components.js'></script>
+    <a-scene>
+      <a-assets>
+        <audio id="sample" src="../audio/sample.mp3" preload="auto"></audio>
+      </a-assets>
+      <a-entity
+        geometry="primitive:box;"
+        position="0 1 1"
+        material="color: red;"
+        sound="src: #sample; loop: true"
+        shybox
+      ></a-entity>
+
+      <a-entity
+        geometry="primitive: plane; width: 10; height: 10;"
+        rotation="270 0 0"
+      ></a-entity>
+
+      <a-entity id='camera' camera look-controls wasd-controls position="0 1 5"></a-entity>
+    </a-scene>
+  </body>
+</html>

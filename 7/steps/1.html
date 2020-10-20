@@ -54,7 +54,7 @@
       const box = sceneEl.querySelector('#box');
       const slider = document.getElementById('slider');
 
-      setInterval(() => {
+      const interval = setInterval(() => {
         box.object3D.rotation.x += slider.value / 100;
       }, 1);
     </script>

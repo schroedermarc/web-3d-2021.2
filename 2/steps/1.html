@@ -38,5 +38,27 @@
 
       <a-entity camera look-controls wasd-controls position="0 1 5"></a-entity>
     </a-scene>
+
+    <script>
+      const entityEl = document.querySelector('a-scene');
+      const sound = document.querySelector('#my-box');
+      const actualAudio = document.querySelector('#sample-audio');
+      let paused = false;
+
+      console.log(sound.components);
+
+      entityEl.addEventListener('sound-loaded', () => {
+        console.log('loaded');
+      });
+
+      setInterval(() => {
+        if (paused) {
+          paused = false;
+          sound.components.sound.play();
+          paused = true;
+          sound.components.sound.pause();
+        }
+      }, 300);
+    </script>
   </body>
 </html>
