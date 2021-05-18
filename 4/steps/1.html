@@ -5,7 +5,17 @@
   </head>
   <body>
     <a-scene shadow antialiasing>
-      <a-entity environment="preset: goaland"></a-entity>
+
+      <a-assets>
+        <a-asset-item id='stool' src='../../models/Stool.obj'/>
+        <img id='stool-texture' src="../../images/tiger-texture.png"/>
+      </a-assets>
+
+      <a-entity environment="preset: japan"></a-entity>
+
+      <a-entity obj-model="obj: #stool" scale="0.01 0.01 0.01" material="src: #stool-texture">
+
+      </a-entity>
 
       <a-entity light="type: ambient; intensity: .2"></a-entity>
 

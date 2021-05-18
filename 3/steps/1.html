@@ -9,8 +9,8 @@
           id="me-video"
           autoplay
           loop="true"
-          src="../../video/me.m4v"
           muted
+          src="../../video/me.m4v"
         ></video>
         <audio id="me-audio" loop="true" src="../../audio/me2.m4a"></audio>
       </a-assets>
@@ -18,7 +18,7 @@
       <a-entity rotation="270 0 0" position="0 2 -45">
         <a-entity
           id="video-container1"
-          sound="src: #me-audio; loop: true;"
+          sound="src: #me-audio; loop: true; autoplay: true"
           position="0 -30 0"
         >
           <a-video
@@ -82,33 +82,33 @@
     <script type="text/javascript">
       document.querySelector('a-scene').addEventListener('loaded', function () {
         let iOS =
-          /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+          /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
         if (iOS) {
           function startAudio() {
-            let entity = document.querySelector('#video-container1');
-            entity.components.sound.playSound();
+            let entity = document.querySelector('#video-container1')
+            entity.components.sound.playSound()
 
-            entity = document.querySelector('#video-container2');
-            entity.components.sound.playSound();
+            entity = document.querySelector('#video-container2')
+            entity.components.sound.playSound()
 
-            entity = document.querySelector('#video-container3');
-            entity.components.sound.playSound();
+            entity = document.querySelector('#video-container3')
+            entity.components.sound.playSound()
           }
-          document.body.addEventListener('click', startAudio);
+          document.body.addEventListener('click', startAudio)
         } else {
-          let entity = document.querySelector('#video-container1');
-          entity.components.sound.playSound();
+          let entity = document.querySelector('#video-container1')
+          entity.components.sound.playSound()
 
-          entity = document.querySelector('#video-container2');
-          entity.components.sound.playSound();
+          entity = document.querySelector('#video-container2')
+          entity.components.sound.playSound()
 
-          entity = document.querySelector('#video-container3');
-          entity.components.sound.playSound();
+          entity = document.querySelector('#video-container3')
+          entity.components.sound.playSound()
 
-          let video = document.querySelector('#me-video');
-          video.play();
+          let video = document.querySelector('#me-video')
+          video.play()
         }
-      });
+      })
     </script>
   </body>
 </html>

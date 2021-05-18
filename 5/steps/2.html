@@ -31,17 +31,63 @@
           <img src="../../images/cubemap/pz.png" />
           <img src="../../images/cubemap/nz.png" />
         </a-cubemap>
+
+        <video
+          id="billboard-video"
+          autoplay
+          loop="true"
+          src="../../video/joe.mp4"
+          muted
+        ></video>
+
+        <audio
+          id="billboard-sound"
+          loop="true"
+          src="../../audio/me.m4a"
+        ></audio>
       </a-assets>
 
+      <!-- environment -->
       <a-entity
         environment="preset: osiris; skyColor: #55a6ff; horizonColor: #f0cacd; shadow: true; lightPosition: 0 13 0; fog: 0.67; groundColor: #5639ac; dressingAmount: 0; grid: none; shadowSize: 2"
       ></a-entity>
 
+      <!-- billboard -->
+      <a-entity position="0 0 -10">
+        <!-- two poles -->
+        <a-entity
+          geometry="primitive: cylinder;"
+          position="-5 5 0"
+          scale="0.1 10 0.1"
+          material="color: black;"
+        ></a-entity>
+
+        <a-entity
+          geometry="primitive: cylinder;"
+          position="5 5 0"
+          scale="0.1 10 0.1"
+          material="color: black;"
+        ></a-entity>
+
+        <!-- video sign -->
+        <a-entity position="0 7 0">
+          <a-sound
+            id="video-container1"
+            src="src: #billboard-sound"
+            autoplay="true"
+            loop="true"
+          ></a-sound>
+          <a-video src="#billboard-video" width="10" height="6"></a-video>
+        </a-entity>
+      </a-entity>
+
+      <!-- car -->
       <a-entity
         id="my-car"
-        position="0 1 0"
-        animation="property:rotation; dur: 10000; to: 0 360 0; easing: linear; loop: true"
-        animation__2="property:position; duration: 1000; to: 0 .5 0; dir: alternate; easing: easeInOutSine; loop: true"
+        position="0 1 40"
+        rotation="0 180 0"
+        animation__2="property:position; dur: 1000; to: 0 .5 0; dir: alternate; easing: easeInOutSine; loop: true"
+        animation__1="property:position; dur: 4000; to: 0 .5 -40; loop: true;"
       >
         <a-entity id="my-car-geometry">
           <a-entity
@@ -58,30 +104,53 @@
             obj-model="obj: #flying-car-frame-obj; mtl: #flying-car-frame-mtl;"
             shadow="cast: true;"
           ></a-entity>
-
-          <a-animation
-            attribute="position"
-            dur="1000"
-            to="0 .5 0"
-            easing="ease-in-out-sine"
-            direction="alternate"
-            repeat="indefinite"
-          ></a-animation>
         </a-entity>
 
-        <a-animation
-          attribute="rotation"
-          dur="10000"
-          to="0 359.99 0"
-          easing="linear"
-          repeat="indefinite"
-        ></a-animation>
+        <!-- camera -->
+        <a-entity rotation="0 180 0">
+          <a-entity
+            camera
+            look-controls
+            wasd-controls
+            position="0 1 4"
+          ></a-entity>
+        </a-entity>
       </a-entity>
 
+      <!-- lights -->
       <a-entity light="type:point;" position="0.051 10 0.628"></a-entity>
       <a-entity light="type: ambient; intensity: .2"></a-entity>
-
-      <a-entity camera look-controls wasd-controls position="0 2 3"></a-entity>
     </a-scene>
+    <script>
+      document.querySelector('a-scene').addEventListener('loaded', function () {
+        let iOS =
+          /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+        if (iOS) {
+          function startAudio() {
+            let entity = document.querySelector('#video-container1')
+            entity.components.sound.playSound()
+
+            entity = document.querySelector('#video-container2')
+            entity.components.sound.playSound()
+
+            entity = document.querySelector('#video-container3')
+            entity.components.sound.playSound()
+          }
+          document.body.addEventListener('click', startAudio)
+        } else {
+          let entity = document.querySelector('#video-container1')
+          entity.components.sound.playSound()
+
+          entity = document.querySelector('#video-container2')
+          entity.components.sound.playSound()
+
+          entity = document.querySelector('#video-container3')
+          entity.components.sound.playSound()
+
+          let video = document.querySelector('#me-video')
+          video.play()
+        }
+      })
+    </script>
   </body>
 </html>

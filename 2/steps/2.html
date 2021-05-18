@@ -15,20 +15,14 @@
 
       <a-entity
         id="my-box"
-        sound="src:#sample-audio;loop:true; "
+        sound="src:#sample-audio; loop:true; autoplay: true; "
         geometry="primitive: box;"
-        position="-40 1.5 0"
+        position="0 1.5 0"
         rotation="0 45 0"
         shadow="cast: true;"
         material="color: red;"
+        animation="property: position; to: 40 1.5 0; dur: 4000; easing: linear; loop: true"
       >
-        <a-animation
-          attribute="position"
-          dur="10000"
-          to="40 1.5 0"
-          direction="alternate"
-          repeat="indefinite"
-        ></a-animation>
       </a-entity>
 
       <a-entity

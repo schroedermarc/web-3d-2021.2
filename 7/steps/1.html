@@ -50,13 +50,19 @@
     <input type="range" id="slider" min="0" max="10" value="0" />
 
     <script>
-      const sceneEl = document.querySelector('a-scene');
-      const box = sceneEl.querySelector('#box');
-      const slider = document.getElementById('slider');
+      // get the a-scene
+      const sceneEl = document.querySelector('a-scene')
+
+      // get the thing with the id of box
+      const box = sceneEl.querySelector('#box')
+
+      console.log(box.object3D)
+
+      const slider = document.getElementById('slider')
 
       const interval = setInterval(() => {
-        box.object3D.rotation.x += slider.value / 100;
-      }, 1);
+        box.object3D.rotation.x += slider.value / 100
+      }, 1)
     </script>
   </body>
 </html>

@@ -1,14 +1,19 @@
-
 <html>
   <head>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <!-- Particle System Documentation: https://www.npmjs.com/package/aframe-particle-system-component -->
-    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script> 
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
   </head>
   <body>
-    <a-scene background='color: black'>
+    <a-scene background="color: black">
+      <a-assets>
+        <img src="../images/tiger-texture.png" id="custom" />
+      </a-assets>
 
-      <a-entity position="0 1 1" particle-system="color: #EF0000,#44CC00; preset: default"></a-entity>
+      <a-entity
+        position="0 1 1"
+        particle-system="color: #EF0000,#44CC00; preset: default; texture: ../video/joe.mp4"
+      ></a-entity>
 
       <a-entity
         geometry="primitive:box;"
