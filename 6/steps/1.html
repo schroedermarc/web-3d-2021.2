@@ -24,13 +24,13 @@
         ></a-asset-item>
 
         <video
-          id="me-video"
+          id="billboard-video"
           autoplay
           loop="true"
-          src="../../video/joe.mp4"
+          src="../../video/internet.mp4"
           muted
         ></video>
-        <audio id="me-audio" loop="true" src="../../audio/me.m4a"></audio>
+        <audio id="me-audio" loop="true" src="../../audio/vpr.wav"></audio>
 
         <audio
           id="sample-audio"
@@ -59,11 +59,11 @@
         rotation="0 -20 0"
       >
         <a-video
-          src="#me-video"
+          src="#billboard-video"
           width="12"
           height="8"
           position="0 7 0"
-          rotation="0 0 0"
+          rotation="0 180 0"
         ></a-video>
         <a-entity
           geometry="primitive: cylinder; radius:.2; height:10;"
@@ -79,7 +79,7 @@
 
       <a-entity
         id="my-car"
-        sound="src: #sample-audio; loop: true;"
+        sound="src: #me-audio; loop: true;"
         soundplaybackrate="1"
         position="0 2 -50"
         animation="property:position; dur: 5000; to: 0 1 50; easing: linear; loop: true"
@@ -87,7 +87,7 @@
         <a-entity id="my-car-geometry">
           <a-entity
             obj-model="obj: #flying-car-body-obj;"
-            material="src:../../images/tiger-texture.png;
+            material="src:../../video/vapor.mp4;
             envMap: #sky-cubemap;
             metalness:.8;
             roughness:0;"
@@ -127,28 +127,28 @@
     <script type="text/javascript">
       document.querySelector('a-scene').addEventListener('loaded', function () {
         let iOS =
-          /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+          /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
         if (iOS) {
           function startAudio() {
-            let entity = document.querySelector('#video-container');
-            entity.components.sound.playSound();
+            let entity = document.querySelector('#video-container')
+            entity.components.sound.playSound()
 
-            entity = document.querySelector('#my-car');
-            entity.components.sound.playSound();
-            document.body.removeEventListener('click', startAudio);
+            entity = document.querySelector('#my-car')
+            entity.components.sound.playSound()
+            document.body.removeEventListener('click', startAudio)
           }
-          document.body.addEventListener('click', startAudio);
+          document.body.addEventListener('click', startAudio)
         } else {
-          let entity = document.querySelector('#video-container');
-          entity.components.sound.playSound();
+          let entity = document.querySelector('#video-container')
+          entity.components.sound.playSound()
 
-          entity = document.querySelector('#my-car');
-          entity.components.sound.playSound();
+          entity = document.querySelector('#my-car')
+          entity.components.sound.playSound()
 
-          let video = document.querySelector('#me-video');
-          video.play();
+          let video = document.querySelector('#billboard-video')
+          video.play()
         }
-      });
+      })
     </script>
   </body>
 </html>
