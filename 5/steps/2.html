@@ -36,8 +36,9 @@
           id="billboard-video"
           autoplay
           loop="true"
-          src="../../video/joe.mp4"
+          src="../../video/internet.mp4"
           muted
+          autoplay
         ></video>
 
         <audio
@@ -49,7 +50,7 @@
 
       <!-- environment -->
       <a-entity
-        environment="preset: osiris; skyColor: #55a6ff; horizonColor: #f0cacd; shadow: true; lightPosition: 0 13 0; fog: 0.67; groundColor: #5639ac; dressingAmount: 0; grid: none; shadowSize: 2"
+        environment="preset: tron; shadow: true; lightPosition: 0 13 0; fog: 0.67; dressingAmount: 0; grid: none; shadowSize: 2"
       ></a-entity>
 
       <!-- billboard -->
@@ -92,9 +93,9 @@
         <a-entity id="my-car-geometry">
           <a-entity
             obj-model="obj: #flying-car-body-obj;"
-            material="src:../../images/tiger-texture.png;
+            material="src:../../video/vapor2.mp4;
             envMap: #sky-cubemap;
-            metalness:.8;
+            metalness:0;
             roughness:0;"
             shadow="cast:true"
           >
@@ -138,16 +139,7 @@
           }
           document.body.addEventListener('click', startAudio)
         } else {
-          let entity = document.querySelector('#video-container1')
-          entity.components.sound.playSound()
-
-          entity = document.querySelector('#video-container2')
-          entity.components.sound.playSound()
-
-          entity = document.querySelector('#video-container3')
-          entity.components.sound.playSound()
-
-          let video = document.querySelector('#me-video')
+          let video = document.querySelector('#billboard-video')
           video.play()
         }
       })
